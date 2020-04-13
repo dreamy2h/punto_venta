@@ -1,14 +1,14 @@
 package formularios;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class principal extends javax.swing.JFrame {
     public principal() {
@@ -70,6 +70,7 @@ public class principal extends javax.swing.JFrame {
     private void crear_formulario_mant_usuarios() {
         JScrollPane jsp_formulario = new JScrollPane();
         JPanel jp_formulario = new JPanel(new GridBagLayout());
+        jp_formulario.setBorder(new EmptyBorder(1, 10, 1, 10));
         GridBagConstraints c = new GridBagConstraints();
         
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -82,8 +83,6 @@ public class principal extends javax.swing.JFrame {
         jsp_formulario.getViewport().setView(jp_formulario);
         jp_general.add(jsp_formulario);
         jp_general.updateUI();
-        
-        jp_formulario.setLayout(new BoxLayout(jp_formulario, BoxLayout.Y_AXIS));
         
         JLabel lbl_usuario = new JLabel("Usuario");
         c.gridx = 0;
@@ -115,9 +114,16 @@ public class principal extends javax.swing.JFrame {
         c.gridy = 2;
         jp_formulario.add(txt_clave, c);
         
-        jp_formulario.setPreferredSize(new Dimension(100, 100));
-        jp_formulario.setMaximumSize(jp_formulario.getPreferredSize()); 
-        jp_formulario.setMinimumSize(jp_formulario.getPreferredSize());
+        Object titulos []={"Identificador","Usuario", "Nombre"};
+        Object celdas [][]=new Object[4][3];
+        
+        JTable grid_usuarios = new JTable(celdas, titulos);
+        JScrollPane scp_grid_usu =new JScrollPane(grid_usuarios);
+        getContentPane().add(scp_grid_usu);
+        c.gridwidth = 2;
+        c.gridx = 0;
+        c.gridy = 3;
+        jp_formulario.add(scp_grid_usu, c);
         
         jp_formulario.updateUI();
     }
